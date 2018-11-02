@@ -63,7 +63,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html',
             filename: 'index.html',
-            favicon: 'src/favicon.png'
+            favicon: 'src/favicon.jpg'
         }),
         // For HMR, makes it easier to see which dependencies are being patched
         new webpack.NamedModulesPlugin(),
