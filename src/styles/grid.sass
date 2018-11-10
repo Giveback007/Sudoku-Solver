@@ -1,0 +1,45 @@
+// -- size -- //
+$grid-margin: 5px
+$sqr-size: 50px
+
+.grid
+    margin: auto
+    display: block
+    background: #021531
+    padding: ($grid-margin * 2) ($grid-margin) ($grid-margin) ($grid-margin * 2)
+
+.row
+    &:nth-child(3n)
+        margin-bottom: $grid-margin
+
+.sqr
+    width: $sqr-size
+    height: $sqr-size
+    margin: 1.5px
+    &:nth-child(3n)
+        margin-right: $grid-margin
+// -- size -- //
+
+.row
+    margin: auto
+    display: flex
+
+.sqr
+    cursor: pointer
+    color: #ff8f00
+    font-size: 30px
+    background: #1b4f79
+    border-style: none
+    display: flex
+    font-weight: bold
+    transition: background 0.5s ease-in-out
+    &:hover
+        background: #2f6088
+    &.preset
+        color: white
+    &.active
+        border: white dashed
+        outline: none
+
+.sqr span
+    margin: auto
