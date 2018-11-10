@@ -1,7 +1,7 @@
 import { rowDict, colDict, blkDict, square, notes, row, blk, col, gridRefObj, value } from "../@types/app.types";
 import { arrGen, iterate, dictionary } from "@giveback007/util-lib";
 
-const notes: notes = arrGen(9).reduce((obj, x, i) => { obj[i + 1] = false; return obj; }, { });
+export const notesObj: notes = arrGen(9).reduce((obj, x, i) => { obj[i + 1] = false; return obj; }, { });
 const blocks: dictionary<blk> = { 11: 'A', 14: 'B', 17: 'C', 41: 'D', 44: 'E', 47: 'F', 71: 'G', 74: 'H', 77: 'I' };
 
 const getMax = (n) => n % 3 ? n + (3 - n % 3) : n;
@@ -28,7 +28,7 @@ export function generateGrid(preGenGrid?: value[][]): gridRefObj {
         const square: square = {
             id, row, col, blk, 
             preset: false,
-            notes: { ...notes },
+            notes: { ...notesObj },
             _value: null,
             get value(): value { return this._value; },
             set value(val: value) {
@@ -59,9 +59,9 @@ export function generateGrid(preGenGrid?: value[][]): gridRefObj {
             },
         };
 
-        if (!rows[row]) rows[row] = { values: { ...notes } } as any;
-        if (!cols[col]) cols[col] = { values: { ...notes } } as any;
-        if (!blks[blk]) blks[blk] = { values: { ...notes } } as any;
+        if (!rows[row]) rows[row] = { values: { ...notesObj } } as any;
+        if (!cols[col]) cols[col] = { values: { ...notesObj } } as any;
+        if (!blks[blk]) blks[blk] = { values: { ...notesObj } } as any;
         
         if (preGenGrid && preGenGrid[x][y]) {
             square.value = preGenGrid[x][y];

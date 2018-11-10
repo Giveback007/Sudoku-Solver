@@ -1,6 +1,7 @@
 import { State } from "../@types/state.types";
 import { clone, gameKeys } from "../util";
 import { gridRefObj, value } from "../@types";
+import { genNotes } from "../util/notes.util";
 
 export class StateManager {
     set state(state: State) { if (!this._state) this.init(state); }
@@ -16,7 +17,7 @@ export class StateManager {
         window.addEventListener('keyup', (e) => this.keyInput(e));
     }
 
-    keyInput(e: KeyboardEvent) {
+    keyInput = (e: KeyboardEvent) => {
         const val: value | 'del' = gameKeys[e.key];
         const sqr = this.grid[this.activeSqr];
         
@@ -28,6 +29,10 @@ export class StateManager {
     clickSqr = (id: string) => {
         this.state.activeSqr = id;
         logSquare(this.state.gridRef, id);
+    }
+
+    run = () => {
+        genNotes(this.state.gridRef);
     }
 }
 
