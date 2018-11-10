@@ -1,7 +1,8 @@
-import { State } from "../@types/state.types";
-import { clone, gameKeys } from "../util";
-import { gridRefObj, value } from "../@types";
-import { genNotes } from "../util/notes.util";
+import { State } from "../@types";
+import { gameKeys, logGrid,  generateGrid } from "../util";
+import { value } from "../@types";
+import { genNotes } from "../util";
+import { objVals, objKeys } from "@giveback007/util-lib";
 
 export class StateManager {
     set state(state: State) { if (!this._state) this.init(state); }
@@ -28,22 +29,41 @@ export class StateManager {
 
     clickSqr = (id: string) => {
         this.state.activeSqr = id;
-        logSquare(this.state.gridRef, id);
+        // logSquare(this.state.gridRef, id);
     }
 
     run = () => {
+        const { grid, blks, cols, rows } = this.state.gridRef;
+        
         genNotes(this.state.gridRef);
+        // solves easy & medium
+        objVals(this.grid).forEach((sqr) => {
+            const arr = objKeys(sqr.notes).filter((n) => sqr.notes[n]);
+            if (arr.length === 1) sqr.value = arr[0];
+        })
+
+        // getGroupNotes();
+        
+        // solved hard
+        // const arr = [blks, cols, rows];
+        // arr.map((obj) => {
+        //     objKeys(obj).forEach((key: blk | row) => {
+        //         const x = { ...obj[key] };
+        //         delete x.values;
+        //         // Have the square auto set notes for the given blk, col, and row
+        //         const notes = { ...sqrNotes };
+        //         objVals(x as dictionary<square>).forEach((sqr) => )
+        //     })
+        // })
+    }
+
+    log = () => {
+        logGrid(this.state.gridRef);
+    }
+
+    clearGrid = () => {
+        this.state.gridRef = generateGrid(null);
     }
 }
 
-function logSquare(gridRef: gridRefObj, id: string) {
-    const { blks, cols, grid, rows } = gridRef;
-    const sqr = grid[id];
-    const row = rows[sqr.row];
-    const col = cols[sqr.col];
-    const blk = blks[sqr.blk];
-    console.log('sqr-' + id, clone(sqr));
-    console.log('row-' + sqr.row, clone(row));
-    console.log('col-' + sqr.col, clone(col));
-    console.log('blk-' + sqr.blk, clone(blk));
-}
+

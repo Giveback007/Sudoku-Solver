@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@giveback007/mutable-react-state": "0.0.5",
-    "@giveback007/util-lib": "^0.3.2",
+    "@giveback007/util-lib": "^0.4.0",
     "react": "16.6.1",
     "react-dom": "16.6.1"
   },

@@ -1,13 +1,17 @@
 import { hot } from "react-hot-loader";
 import React = require("react");
 import { Grid } from ".";
-import { run } from "../state";
+import { run, log, clearGrid } from "../state";
 
 const AppComponent = () => (
     <div className="app">
         <h1>Sudoku</h1>
         <Grid />
-        <button onClick={run}>Run</button>
+        <div className="controls">
+            <button onClick={run}>Run</button>
+            <button onClick={log}>Log</button>
+            <button onClick={clearGrid}>Clear</button>
+        </div>
     </div>
 ) 
 

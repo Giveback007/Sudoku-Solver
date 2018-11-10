@@ -1,7 +1,17 @@
+import { notes } from '../@types';
+import { arrGen } from '@giveback007/util-lib';
+
 export * from './generate-grid.util';
+export * from './notes.util';
 export * from './logger.util';
 
+export const print = (...args: any[]) => print(...args);
+
 export const clone = <T>(obj: T) => JSON.parse(JSON.stringify(obj));
+
+export const nNotes = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
+
+export const sqrNotes: notes = arrGen(9).reduce((obj, x, i) => { obj[i + 1] = false; return obj; }, { });
 
 export const gameKeys = {
     '1': 1 as 1,

@@ -5,10 +5,11 @@ import { initStateAndRender } from '@giveback007/mutable-react-state';
 import { App } from "./components/app.component";
 import { generateGrid } from "./util/generate-grid.util";
 import { initState } from "./state/init.state";
+import { print } from "util";
 
 const state = initStateAndRender(<App />, document.getElementById('root'), initState).state
 
-console.log(state);
+print(state);
 appState.state = state;
 
 window['genGame'] = generateGrid;

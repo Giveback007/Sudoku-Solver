@@ -9,7 +9,7 @@ const Note = ({ bool, i }: { bool: boolean, i: number }) => (
 
 const Notes = ({ notes }: { notes: notes }) => (
     <div className="notes">
-        {objVals(notes).map((bool, i) => <Note { ...{ bool, i } } />)}
+        {objVals(notes).map((bool, i) => <Note key={i} { ...{ bool, i } } />)}
     </div>
 );
 

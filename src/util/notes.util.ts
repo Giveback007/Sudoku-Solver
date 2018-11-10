@@ -1,16 +1,17 @@
-import { gridRefObj } from "../@types";
-import { iterate } from "@giveback007/util-lib";
-import { notesObj } from "./generate-grid.util";
+import { gridRefObj, refObj, row, col, blk, square } from "../@types";
+import { iterate, removeObjKeys, dictionary, objKeys } from "@giveback007/util-lib";
+import { sqrNotes } from ".";
+import { print } from "util";
 
 export function genNotes(gridRef: gridRefObj) {
     const { gridArr, rows, cols, blks } = gridRef;
-
+    
     gridArr.forEach((row) => {
         row.forEach(sqr => {
-            sqr.notes = { ...notesObj };
+            sqr.notes = { ...sqrNotes };
             const { blk, col, row, notes } = sqr
-            iterate(9).for(i => {
-                const n = i + 1;
+            iterate(9).for(({ x }) => {
+                const n = x + 1;
 
                 if (sqr.value) return;
                 if (rows[row].values[n]) return;
@@ -20,6 +21,15 @@ export function genNotes(gridRef: gridRefObj) {
                 notes[n] = true;
             })
         })
+    })
+}
+type T = refObj<row> | refObj<col> | refObj<blk>;
+/** Notes for row | col | blk */
+export function getGroupNotes(x: T) {
+    const obj: dictionary<square> = removeObjKeys(x, ['values']);
+    print('stuff', x);
+    objKeys(obj).forEach((key) => {
+        print(x[key])
     })
 }
 
