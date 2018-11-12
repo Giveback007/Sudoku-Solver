@@ -1,7 +1,9 @@
-import { square, gridRefObj } from "./app.types";
+import { square, notes } from "./app.types";
+import { dictionary } from "@giveback007/util-lib";
 
 export type State = {
     activeSqr: string;
-    gridRef: gridRefObj;
-    // grid: square[][]
+    squares: dictionary<square>;
+    notes: dictionary<notes>;
+    ids: string[][]
 }

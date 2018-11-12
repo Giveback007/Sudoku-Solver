@@ -1,28 +1,27 @@
 import { State } from "../@types";
-import { gameKeys, logGrid,  generateGrid } from "../util";
+import { logGrid, Game, n } from "../util";
 import { value } from "../@types";
-import { genNotes } from "../util";
-import { objVals, objKeys } from "@giveback007/util-lib";
+import { cloneLog, clone, Obj, sKeys, objFilter, dictionary } from '@giveback007/util-lib';
+import { gameKeys, valueDict } from "../@data";
 
 export class StateManager {
     set state(state: State) { if (!this._state) this.init(state); }
-
     get state() { return this._state; }
-    get activeSqr() { return this.state.activeSqr }
-    get grid() { return this.state.gridRef.grid }
-
+    get game() { return Game(this.state.squares); }
     private _state: State;
 
     private init(state: State) {
         this._state = state;
-        window.addEventListener('keyup', (e) => this.keyInput(e));
+        window.addEventListener('keyup', (e) => this.sqrValueChange(e));
     }
 
-    keyInput = (e: KeyboardEvent) => {
-        const val: value | 'del' = gameKeys[e.key];
-        const sqr = this.grid[this.activeSqr];
+    sqrValueChange = (x: KeyboardEvent | value | 'del', id?: string) => {
+        const { activeSqr, squares } = this.state;
         
-        if (!val || sqr.preset) return;
+        const val: value | 'del' = x instanceof KeyboardEvent ? gameKeys[x.key] : x;
+        const sqr = squares[id ? id : activeSqr];
+        
+        if (!sqr || !val || sqr.preset) return;
 
         sqr.value = val === 'del' ? null : val;
     }
@@ -33,14 +32,23 @@ export class StateManager {
     }
 
     run = () => {
-        const { grid, blks, cols, rows } = this.state.gridRef;
-        
-        genNotes(this.state.gridRef);
-        // solves easy & medium
-        objVals(this.grid).forEach((sqr) => {
-            const arr = objKeys(sqr.notes).filter((n) => sqr.notes[n]);
-            if (arr.length === 1) sqr.value = arr[0];
-        })
+        this.state.notes = this.game.allNotes();
+
+        const newValDict: dictionary<value> = {};
+        // Solve Named Single //
+        Obj(this.state.notes).map(({ key, val }) => {
+            const notes = Obj(val);
+            const arr = notes.keys.filter((k) => val[k]);
+            
+            if (arr.length === 1) newValDict[key] = valueDict[arr[0]]
+        });
+
+        Obj(newValDict).map(({ key, val }) => this.state.squares[key].value = val);
+
+        // objVals(this.grid).forEach((sqr) => {
+        //     const arr = objKeys(sqr.notes).filter((n) => sqr.notes[n]);
+        //     if (arr.length === 1) sqr.value = arr[0];
+        // })
 
         // getGroupNotes();
         
@@ -58,11 +66,11 @@ export class StateManager {
     }
 
     log = () => {
-        logGrid(this.state.gridRef);
+        logGrid(this.state.squares);
     }
 
     clearGrid = () => {
-        this.state.gridRef = generateGrid(null);
+        // this.state.gridRef = generateGrid(null);
     }
 }
 

@@ -9,7 +9,7 @@ import { print } from "util";
 
 const state = initStateAndRender(<App />, document.getElementById('root'), initState).state
 
-print(state);
+console.log(state);
 appState.state = state;
 
 window['genGame'] = generateGrid;
