@@ -9,8 +9,7 @@ const AppComponent = () => (
         <Grid />
         <div className="controls">
             <button onClick={run}>Run</button>
-            <button onClick={log}>Log</button>
-            <button onClick={clearGrid}>Clear</button>
+            {/* <button onClick={clearGrid}>Clear</button> */}
         </div>
     </div>
 ) 

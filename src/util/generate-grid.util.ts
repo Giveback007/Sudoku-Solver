@@ -1,6 +1,6 @@
 import { square, row, col, value, blk, notes } from "../@types/app.types";
 import { iterate, dictionary, arrGen } from "@giveback007/util-lib";
-import { blocksDict, sqrNotes } from "../@data";
+import { blocksDict, sqrNotesInit } from "../@data";
 
 const blkMax = (n) => n % 3 ? n + (3 - n % 3) : n;
 const blkMin = (n) => blkMax(n) - 2;
@@ -28,7 +28,7 @@ export function generateGrid(preGenGrid?: value[][]) {
         
         ids[x][y] = id;
         squares[id] = { preset, value, id, row, col, blk };
-        notes[id] = sqrNotes(false);
+        notes[id] = sqrNotesInit(false);
     });
 
     return { squares, notes, ids };

@@ -1,49 +1,23 @@
-import { dictionary, Arr, Obj, } from "@giveback007/util-lib";
+import { dictionary, Obj, } from "@giveback007/util-lib";
 import { square, notes } from "../@types";
-import { sqrNotes } from "../@data";
-import { getHouses } from ".";
+import { sqrNotesInit } from "../@data";
+import { getSqrNotes } from "./square.util";
 
-export function getNotes(squares: dictionary<square>, id: string) {
-    if (squares[id].value) return sqrNotes(false);
-    const { col, row, blk } = getHouses(squares, id);
+export function reduceToNotes2(sqrs: notes[]) {
+    // sqrs.reduce(())
+    // return sqrs.reduce((notes, { value }): notes => {
+    //     if (value) notes[value] = false;
+    //     return notes;
+    // }, sqrNotesInit(true));
+}
 
-    return [ ...col, ...row, ...blk ].reduce(
-    (notes, { value }) => {
+export function reduceToNotes(sqrs: square[]) {
+    return sqrs.reduce((notes, { value }): notes => {
         if (value) notes[value] = false;
         return notes;
-    }, sqrNotes(true));
+    }, sqrNotesInit(true));
 }
 
 export function getAllNotes(squares: dictionary<square>): dictionary<notes> {
-    return Obj(squares).map(({ val: { id } }) => getNotes(squares, id));
-
-
-    // gridArr.forEach((row) => {
-    //     row.forEach(sqr => {
-    //         sqr.notes = { ...sqrNotes };
-    //         const { blk, col, row, notes } = sqr
-    //         iterate(9).for(({ x }) => {
-    //             const n = x + 1;
-
-    //             if (sqr.value) return;
-    //             if (rows[row].values[n]) return;
-    //             if (cols[col].values[n]) return;
-    //             if (blks[blk].values[n]) return;
-
-    //             notes[n] = true;
-    //         })
-    //     })
-    // })
+    return Obj(squares).map(({ val: { id } }) => getSqrNotes(squares, id));
 }
-
-// type T = refObj<row> | refObj<col> | refObj<blk>;
-// /** Notes for row | col | blk */
-// export function getGroupNotes(x: T) {
-//     const obj: dictionary<square> = removeObjKeys(x, ['values']);
-//     console.log('stuff', x);
-//     objKeys(obj).forEach((key) => {
-//         console.log(x[key])
-//     })
-// }
-
-// ### if only one instance of notes# is found in a blk, sqr, or row then it is the outcome

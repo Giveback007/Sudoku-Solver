@@ -1,8 +1,9 @@
 import { State } from "../@types";
-import { logGrid, Game, n } from "../util";
+import { logGrid, Game } from "../util";
 import { value } from "../@types";
-import { cloneLog, clone, Obj, sKeys, objFilter, dictionary } from '@giveback007/util-lib';
-import { gameKeys, valueDict } from "../@data";
+import { gameKeys } from "../@data";
+import { getNakedSingles, getHiddenSingles } from "../strategies/singles";
+import { Obj } from "@giveback007/util-lib";
 
 export class StateManager {
     set state(state: State) { if (!this._state) this.init(state); }
@@ -33,18 +34,12 @@ export class StateManager {
 
     run = () => {
         this.state.notes = this.game.allNotes();
+        const nakedSingles = getNakedSingles(this.state.notes);
+        const hiddenSingles = getHiddenSingles(this.state.notes);
 
-        const newValDict: dictionary<value> = {};
-        // Solve Named Single //
-        Obj(this.state.notes).map(({ key, val }) => {
-            const notes = Obj(val);
-            const arr = notes.keys.filter((k) => val[k]);
-            
-            if (arr.length === 1) newValDict[key] = valueDict[arr[0]]
-        });
-
-        Obj(newValDict).map(({ key, val }) => this.state.squares[key].value = val);
-
+        const newVals = Object.assign({}, nakedSingles, hiddenSingles);
+        Obj(newVals).map(({ key, val }) => this.state.squares[key].value = val);
+        
         // objVals(this.grid).forEach((sqr) => {
         //     const arr = objKeys(sqr.notes).filter((n) => sqr.notes[n]);
         //     if (arr.length === 1) sqr.value = arr[0];

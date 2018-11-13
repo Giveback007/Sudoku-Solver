@@ -1,5 +1,3 @@
-export const n = Number;
-
 export * from './generate-grid.util';
 export * from './notes.util';
 export * from './logger.util';

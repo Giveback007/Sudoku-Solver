@@ -1,20 +1,20 @@
 import { dictionary, arrGen } from '@giveback007/util-lib';
-import { blk, notes } from '../@types';
+import { blk, notes, col, row } from '../@types';
 
 export * from './presets.data';
 
 export const blocksDict: dictionary<blk> = {
-    '11': 'A', '14': 'B', '17': 'C', '41': 'D', '44': 'E', '47': 'F', '71': 'G', '74': 'H', '77': 'I'
+    11: '1', 14: '2', 17: '3', 41: '4', 44: '5', 47: '6', 71: '7', 74: '8', 77: '9'
 };
 
-export const colKeys: [1, 2, 3, 4, 5, 6, 7, 8, 9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-export const rowKeys: [1, 2, 3, 4, 5, 6, 7, 8, 9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-export const blkKeys: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+export const colKeys: col[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+export const rowKeys: row[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+export const blkKeys: blk[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 export const nNotes = () =>
     ({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 });
 
-export const sqrNotes = (bool): notes =>
+export const sqrNotesInit = (bool): notes =>
     ({ 1: bool, 2: bool, 3: bool, 4: bool, 5: bool, 6: bool, 7: bool, 8: bool, 9: bool })
 
 export const valueDict = {
