@@ -1,6 +1,6 @@
-import { square, row, col, value, blk, notes } from "../@types";
+import { square, row, value, blk, notes } from "../@types";
 import { iterate, dictionary, arrGen } from "@giveback007/util-lib";
-import { blocksDict, sqrNotesInit } from "../@data";
+import { blocksDict, sqrNotesInit } from "../@data/app.data";
 
 const blkMax = (n) => n % 3 ? n + (3 - n % 3) : n;
 const blkMin = (n) => blkMax(n) - 2;

@@ -1,7 +1,7 @@
 import { dictionary } from "@giveback007/util-lib";
 import { square, row, col, blk, notes } from "../@types";
-import { housesMap } from "../@data";
 import { reduceToNotes, Game } from ".";
+import { housesMap } from "../@data/houses.data";
 
 export const house = <
     T extends dictionary<square> | dictionary<notes>

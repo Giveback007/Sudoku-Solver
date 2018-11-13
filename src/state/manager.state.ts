@@ -1,9 +1,9 @@
 import { State, direction } from "../@types";
 import { gridLogger, Game, copyGrid, generateGrid } from "../util";
 import { value } from "../@types";
-import { gameKeys, arrowKeys } from "../@data";
 import { getNakedSingles, getHiddenSingles } from "../strategies";
 import { Obj } from "@giveback007/util-lib";
+import { gameKeys, arrowKeys } from "../@data/app.data";
 
 export class StateManager {
     set state(state: State) { if (!this._state) this.init(state); }

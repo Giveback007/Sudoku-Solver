@@ -1,13 +1,10 @@
-import { dictionary } from '@giveback007/util-lib';
-import { blk, notes, col, row } from '../@types';
+import { notes } from '../@types';
 
-export const blocksDict: dictionary<blk> = {
+export const blocksDict: {
+    11: '1', 14: '2', 17: '3', 41: '4', 44: '5', 47: '6', 71: '7', 74: '8', 77: '9'
+} = {
     11: '1', 14: '2', 17: '3', 41: '4', 44: '5', 47: '6', 71: '7', 74: '8', 77: '9'
 };
-
-export const colKeys: col[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-export const rowKeys: row[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-export const blkKeys: blk[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 export const nNotes = () =>
     ({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 });

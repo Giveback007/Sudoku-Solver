@@ -1,7 +1,8 @@
 import { Obj, dictionary } from "@giveback007/util-lib";
 import { value, notes } from "../@types";
 import { house } from "../util";
-import { nNotes, housesMap } from "../@data";
+import { nNotes } from "../@data/app.data";
+import { housesMap } from "../@data/houses.data";
 
 function nakedSingle(notes: notes): value {
     const arr = Obj(notes).keys.filter((k) => notes[k]);

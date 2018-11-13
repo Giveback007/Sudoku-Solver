@@ -1,7 +1,7 @@
 import { dictionary, Obj, } from "@giveback007/util-lib";
 import { square, notes } from "../@types";
-import { sqrNotesInit } from "../@data";
 import { getSqrNotes } from ".";
+import { sqrNotesInit } from "../@data/app.data";
 
 export function reduceToNotes(sqrs: square[]) {
     return sqrs.reduce((notes, { value }): notes => {

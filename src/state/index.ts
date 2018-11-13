@@ -1,6 +1,7 @@
 import { StateManager } from "./manager.state";
 
 export const appState = new StateManager;
+
 export const {
     clearGrid,
     clickSqr,
@@ -9,3 +10,4 @@ export const {
     clipBoard
 } = appState
 
+export * from './init.state';
