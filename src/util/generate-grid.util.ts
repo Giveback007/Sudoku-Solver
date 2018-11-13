@@ -1,4 +1,4 @@
-import { square, row, col, value, blk, notes } from "../@types/app.types";
+import { square, row, col, value, blk, notes } from "../@types";
 import { iterate, dictionary, arrGen } from "@giveback007/util-lib";
 import { blocksDict, sqrNotesInit } from "../@data";
 

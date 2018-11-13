@@ -1,9 +1,6 @@
-import { getHouses } from ".";
 import { dictionary } from "@giveback007/util-lib";
 import { square, row, blk, col } from "../@types";
-import { getAllNotes } from "./notes.util";
-import { getSqrNotes } from "./square.util";
-import { getBlk, getCol, getRow } from "./house.util";
+import { getAllNotes, getSqrNotes, getBlk, getCol, getRow, getHouses } from ".";
 
 export function Game(g: dictionary<square>) {
     return {

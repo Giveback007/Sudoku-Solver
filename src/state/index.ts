@@ -1,10 +1,11 @@
-import { StateManager } from "./state-manager.state";
+import { StateManager } from "./manager.state";
 
 export const appState = new StateManager;
 export const {
     clearGrid,
     clickSqr,
-    log,
+    logGrid,
     run,
+    clipBoard
 } = appState
 

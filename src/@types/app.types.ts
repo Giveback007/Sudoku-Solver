@@ -1,5 +1,3 @@
-import { dictionary, iterate } from "@giveback007/util-lib";
-
 export type houseKeys = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 export type value = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | houseKeys;
     
@@ -19,6 +17,9 @@ export type square = {
 }
 
 export type houseMap = { [k in houseKeys]: string[] }
+
+export type arrowKey = 'ArrowDown' | 'ArrowUp' | 'ArrowLeft' | 'ArrowRight';
+export type direction = [-1, 0] | [1, 0] | [0, -1] | [0, 1];
 
 // -- // -- // -- //
 // export type gameDict = dictionary<value | notes>;

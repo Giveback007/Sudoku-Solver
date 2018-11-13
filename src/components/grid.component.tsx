@@ -1,7 +1,6 @@
 import React = require("react");
 import { connect } from "@giveback007/mutable-react-state";
-import { State } from "../@types/state.types";
-import { square, notes } from "../@types";
+import { square, notes, State } from "../@types";
 import { Square } from ".";
 import { dictionary } from "@giveback007/util-lib";
 
