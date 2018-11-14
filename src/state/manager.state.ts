@@ -3,7 +3,8 @@ import { gridLogger, Game, copyGrid, generateGrid } from "../util";
 import { value } from "../@types";
 import { getNakedSingles, getHiddenSingles } from "../strategies";
 import { Obj } from "@giveback007/util-lib";
-import { gameKeys, arrowKeys } from "../@data/app.data";
+import { gameKeys, arrowKeys, sqrNotesInit } from "../@data/app.data";
+import { getLockedPairs } from "../strategies/pairs";
 
 export class StateManager {
     set state(state: State) { if (!this._state) this.init(state); }
@@ -58,6 +59,29 @@ export class StateManager {
 
         const newVals = Object.assign({}, nakedSingles, hiddenSingles);
         Obj(newVals).map(({ key, val }) => this.state.squares[key].value = val);
+
+        // Eliminate all other notes on the given square ids.
+        // If the locked pair is in a house all other instances of
+        // these number are removed 
+        const lockedPairs = getLockedPairs(this.state.notes);
+
+        lockedPairs.map(([[id1, id2], [v1, v2]]) => {
+            this.state.notes[id1] = sqrNotesInit(false);
+            this.state.notes[id1][v1] = true;
+            this.state.notes[id1][v2] = true;
+
+            this.state.notes[id2] = sqrNotesInit(false);
+            this.state.notes[id2][v1] = true;
+            this.state.notes[id2][v2] = true;
+        })
+
+        console.clear();
+        console.log(lockedPairs);
+
+        Obj(
+            Object.assign({}, getNakedSingles(this.state.notes), getHiddenSingles(this.state.notes))
+        ).map(({ key, val }) => this.state.squares[key].value = val);
+         
     }
 
     logGrid = () => gridLogger(this.state.squares);

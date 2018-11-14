@@ -1,5 +1,7 @@
 import { notes } from '../@types';
 
+export const houseTypes: ['rows', 'cols', 'blks'] = ['rows', 'cols', 'blks'];
+
 export const blocksDict: {
     11: '1', 14: '2', 17: '3', 41: '4', 44: '5', 47: '6', 71: '7', 74: '8', 77: '9'
 } = {
